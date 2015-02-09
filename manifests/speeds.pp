@@ -16,8 +16,8 @@ define cumulus_ports::speeds(
   }
   file { '/etc/cumulus/ports.conf':
     ensure => file,
-    owner => 0,
-    group => 0,
+    owner => 'root',
+    group => 'root',
     mode => '0600',
     content => template('cumulus_ports/ports.conf.erb')
   }
