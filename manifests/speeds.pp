@@ -5,7 +5,7 @@ define cumulus_ports::speeds(
   $speed_10g_by_4 = []
 ) {
   case $::operatingsystem {
-    Debian : { $supported = true }
+    CumulusLinux : { $supported = true }
     default: { fail("The ${module_name} module is not supported by ${::operatingsystem} based systems") }
   }
 
