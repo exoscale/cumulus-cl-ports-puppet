@@ -11,13 +11,13 @@ define cumulus_ports::speeds(
 
   file { '/etc/cumulus':
     ensure => directory,
-    mode => 0700,
+    mode => '0700',
     before => File['/etc/cumulus/ports.conf'],
   }
   file { '/etc/cumulus/ports.conf':
     ensure => file,
-    owner => 0,
-    group => 0,
+    owner => 'root',
+    group => 'root',
     mode => '0600',
     content => template('cumulus_ports/ports.conf.erb')
   }
