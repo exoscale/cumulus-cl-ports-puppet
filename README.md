@@ -4,12 +4,11 @@
 
 1. [Overview](#overview)
 2. [Module Description](#module-description)
-3. [Setup - The basics of getting started with mymodule](#setup)
-    * [What mymodule affects](#what-mymodule-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with mymodule](#beginning-with-mymodule)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+3. [Setup](#setup)
+    * [What cumulus_ports affects](#what-cumulus_ports  -affects)
+    * [Beginning with cumulus_ports](#beginning-with-cumulus_ports)
+4. [Usage](#usage)
+5. [Reference](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
@@ -32,7 +31,7 @@ Linux User Guide](http://docs.cumulusnetworks.com) and search for
 
 * This module affects the `/etc/cumulus/ports.conf` file
 * To activate the changes in the file, the `switchd` daemon must be restarted
-> NOTE: restarting the switchd daemon is disruptive
+> **NOTE**: restarting the `switchd` daemon is disruptive
 
 
 ### Beginning with cumulus_ports
@@ -60,14 +59,43 @@ node default {
   * `cumulus_ports`: Main class. It is empty
 
 ### Defined Types
-  * `cumulus_ports::speeds`: generates a custom `/etc/cumulus/ports.conf` based
-    on the speed variables provided.
+  * `cumulus_ports::speeds`:  generates a custom /etc/cumulus/ports.conf based
+  on the following variables:
+  * `speed_10g`: `speed_10g => ['swp1-2']` will produce the
+  following text in /etc/cumulus/ports.conf
+  ```
+  swp1=10G
+    swp2=10G
+    ```
+    * `speed_40g`: `speed_40g => ['swp1-2']` will produce the following text in
+    /etc/cumulus/ports.conf
+    ```
+    swp1=40G
+    swp2=40G
+    ```
+    * `speed_40g_div_4`: `speed_40g_div_4 => ['swp1', 'swp4']` will produce text
+    in /etc/cumulus/ports.conf
+    ```
+    swp1=40/4
+    swp4=40/4
+    ```
+
+    * `speed_10g_by_4`: `speed_10g_by_4 => ['swp1-2']` will produce the following
+    text in /etc/cumulus/ports.conf
+    ```
+    swp1=4x10G
+    swp2=4x10G
+    ```
 
 ## Limitations
 
-This module only works on Cumulus Linux
+This module only works on Cumulus Linux.
 
-## Contributing
+The module, currently, does not do any error
+checking. Ensure all config is thoroughly tested or the switch can
+behave in unpredictable ways.
+
+## Development
 
 1. Fork it.
 2. Create your feature branch (`git checkout -b my-new-feature`).
