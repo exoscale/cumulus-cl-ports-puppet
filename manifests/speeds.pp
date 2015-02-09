@@ -11,7 +11,7 @@ define cumulus_ports::speeds(
 
   file { '/etc/cumulus':
     ensure => directory,
-    mode => 0700,
+    mode => '0700',
     before => File['/etc/cumulus/ports.conf'],
   }
   file { '/etc/cumulus/ports.conf':
