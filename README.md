@@ -1,1 +1,93 @@
-# cumulus-cl-ports-puppet
+# cumulus_ports
+
+#### Table of Contents
+
+1. [Overview](#overview)
+2. [Module Description](#module-description)
+3. [Setup - The basics of getting started with mymodule](#setup)
+    * [What mymodule affects](#what-mymodule-affects)
+    * [Setup requirements](#setup-requirements)
+    * [Beginning with mymodule](#beginning-with-mymodule)
+4. [Usage - Configuration options and additional functionality](#usage)
+5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+5. [Limitations - OS compatibility, etc.](#limitations)
+6. [Development - Guide for contributing to the module](#development)
+
+## Overview
+
+This module provides a simple interface for managing initial port configuration
+on Cumulus Linux
+
+## Module Description
+
+The cumulus_ports module  is responsible for setting the initial speed of 10G or
+40G port. On some bare metal switches, it is possible to take a 40G port and split it up
+into four 10G ports using a breakout cable. For more details, visit [Cumulus
+Linux User Guide](http://docs.cumulusnetworks.com) and search for
+"Switch Port Attributes"
+
+## Setup
+
+### What cumulus_ports affects
+
+* This module affects the `/etc/cumulus/ports.conf` file
+* To activate the changes in the file, the `switchd` daemon must be restarted
+> NOTE: restarting the switchd daemon is disruptive
+
+
+### Beginning with cumulus_ports
+
+This module does not use any default parameters. Support for default parameters is on the roadmap.
+
+## Usage
+
+The module currently supports one defined type, `cumulus_ports::speeds`
+```
+node default {
+  cumulus_ports::speeds { 'speeds':
+    speed_10g => ["swp5-48"],
+    speed_40g => ["swp49","swp51-52"],
+    speed_40g_div_4 => ["swp1-4"],
+    speed_10g_by_4 => ["swp50"],
+  }
+}
+
+```
+
+## Reference
+
+### Classes
+  * `cumulus_ports`: Main class. It is empty
+
+### Defined Types
+  * `cumulus_ports::speeds`: generates a custom `/etc/cumulus/ports.conf` based
+    on the speed variables provided.
+
+## Limitations
+
+This module only works on Cumulus Linux
+
+## Contributing
+
+1. Fork it.
+2. Create your feature branch (`git checkout -b my-new-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin my-new-feature`).
+5. Create new Pull Request.
+
+
+![Cumulus icon](http://cumulusnetworks.com/static/cumulus/img/logo_2014.png)
+
+### Cumulus Linux
+
+Cumulus Linux is a software distribution that runs on top of industry standard
+networking hardware. It enables the latest Linux applications and automation
+tools on networking gear while delivering new levels of innovation and
+ﬂexibility to the data center.
+
+For further details please see:
+[cumulusnetworks.com](http://www.cumulusnetworks.com)
+
+## CONTRIBUTORS
+
+- Stanley Karunditu (@skamithik)
