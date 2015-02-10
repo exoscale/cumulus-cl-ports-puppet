@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'ports_conf' do
   describe 'single interface' do
-    let (:myhash) {{'40g' => 'swp1'}}
+    let (:myhash) {{'40G' => 'swp1'}}
     it do
       should run.with_params(myhash).and_return(
         [

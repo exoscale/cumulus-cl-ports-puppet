@@ -21,6 +21,9 @@ class PortConf
   end
 
   def add_to_hash(speed_type_name, list_of_ports)
+    if list_of_ports.is_a? String
+      list_of_ports = [list_of_ports]
+    end
     list_of_ports.each do |entry|
       port_range = get_range(entry)
       port_range.each do |port_num|
