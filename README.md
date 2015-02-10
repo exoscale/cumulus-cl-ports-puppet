@@ -1,4 +1,4 @@
-# cumulus_ports
+# cumulus_ports for Puppet
 
 #### Table of Contents
 
@@ -14,7 +14,7 @@
 
 ## Overview
 
-This module provides a simple interface for managing initial port configuration
+This Puppet module provides a simple interface for managing initial port configuration
 on Cumulus Linux
 
 ## Module Description
@@ -120,4 +120,4 @@ For further details please see:
 
 ## CONTRIBUTORS
 
-- Stanley Karunditu (@skamithik)
+- Stanley Karunditu [@skamithi](https://github.com/skamithi)
