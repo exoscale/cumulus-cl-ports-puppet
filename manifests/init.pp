@@ -1,2 +1,0 @@
-class cumulus_ports {
-}
