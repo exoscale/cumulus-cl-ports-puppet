@@ -1,9 +1,8 @@
 require 'spec_helper'
-require 'pry-debugger'
 
 describe 'ports_conf' do
   describe 'single interface' do
-    let (:myhash) { { '40G' => 'swp1' }}
+    let (:myhash) {{'40g' => 'swp1'}}
     it do
       should run.with_params(myhash).and_return(
         [
