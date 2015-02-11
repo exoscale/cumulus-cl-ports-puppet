@@ -2,7 +2,7 @@ define cumulus_ports::speeds(
   $speed_10g = [],
   $speed_40g = [],
   $speed_40g_div_4 = [],
-  $speed_10g_by_4 = []
+  $speed_4_by_10g = []
 ) {
   case $::operatingsystem {
     CumulusLinux : { $supported = true }

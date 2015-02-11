@@ -30,7 +30,7 @@ describe 'cumulus_ports::speeds' do
         .with_content(%r{1=40G}) }
     end
     describe "10x4 format" do
-      let(:params) { {:speed_10g_by_4 => 'swp1'}}
+      let(:params) { {:speed_4_by_10g => 'swp1'}}
       it { should contain_file('/etc/cumulus/ports.conf') \
         .with_content(%r{1=4x10G}) }
     end

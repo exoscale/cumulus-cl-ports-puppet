@@ -62,14 +62,14 @@ node default {
   * `cumulus_ports::speeds`:  generates a custom /etc/cumulus/ports.conf based
   on the following variables:
   * `speed_10g`: `speed_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
-  
+
     ```
     swp1=10G
     swp2=10G
     ```
 
   * `speed_40g` : `speed_40g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
-  
+
     ```
     swp1=40G
     swp2=40G
@@ -82,7 +82,7 @@ node default {
     swp4=40/4
     ```
 
-  * `speed_10g_by_4`: `speed_10g_by_4 => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+  * `speed_4_by_10g`: `speed_4_by_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
 
     ```
     swp1=4x10G
