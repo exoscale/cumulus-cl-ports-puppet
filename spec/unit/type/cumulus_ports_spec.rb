@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 cl_ports = Puppet::Type.type(:cumulus_ports)
 
