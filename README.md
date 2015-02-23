@@ -47,7 +47,7 @@ node default {
     speed_10g => "swp5-48",
     speed_40g => ["swp49","swp51-52"],
     speed_40g_div_4 => "swp1-4",
-    speed_10g_by_4 => "swp50",
+    speed_4_by_10g => "swp50",
   }
 }
 
