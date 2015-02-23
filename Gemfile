@@ -2,17 +2,13 @@ source 'https://rubygems.org'
 
 group :test do
   gem 'rake'
-  gem 'rspec'
+  gem 'rspec', '~> 3.2.0'
   gem 'syck'
-  gem 'puppet'
+  gem 'puppet', '~> 3.7.0'
   gem 'puppetlabs_spec_helper'
-  gem 'rspec-puppet'
   gem 'fakefs'
 end
 
 group :development do
-#  gem 'puppet-blacksmith'
-#  gem 'guard-rake'
-#  gem 'rubocop', require: false
   gem 'pry'
 end
