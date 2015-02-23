@@ -43,7 +43,7 @@ This module does not use any default parameters. Support for default parameters 
 The module currently supports one defined type, `cumulus_ports::speeds`
 ```
 node default {
-  cumulus_ports::speeds { 'speeds':
+  cumulus_ports { 'speeds':
     speed_10g => "swp5-48",
     speed_40g => ["swp49","swp51-52"],
     speed_40g_div_4 => "swp1-4",
@@ -55,11 +55,8 @@ node default {
 
 ## Reference
 
-### Classes
-  * `cumulus_ports`: Main class. It is empty
-
-### Defined Types
-  * `cumulus_ports::speeds`:  generates a custom /etc/cumulus/ports.conf based
+### Custom Type
+  * `cumulus_ports`:  generates a custom /etc/cumulus/ports.conf based
   on the following variables:
   * `speed_10g`: `speed_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
 
