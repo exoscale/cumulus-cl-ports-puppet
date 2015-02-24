@@ -5,11 +5,11 @@ cl_ports = Puppet::Type.type(:cumulus_ports)
 describe cl_ports do
   let :params do
     [
-        :name,
-        :speed_40g,
-        :speed_10g,
-        :speed_40g_div_4,
-        :speed_4_by_10g,
+      :name,
+      :speed_40g,
+      :speed_10g,
+      :speed_40g_div_4,
+      :speed_4_by_10g
     ]
   end
 
@@ -36,19 +36,19 @@ describe cl_ports do
       @provider = double 'provider'
       allow(@provider).to receive(:name).and_return(:ruby)
       cl_ports.stubs(:defaultprovider).returns @provider
-      @cumulus_ports = cl_ports.new(:name => 'speeds')
+      @cumulus_ports = cl_ports.new(name: 'speeds')
     end
     subject { allow(@cumulus_ports.provider).to receive(:config_changed?) }
-    let (:ensure_result) { @cumulus_ports.property(:ensure).retrieve }
+    let(:ensure_result) { @cumulus_ports.property(:ensure).retrieve }
 
-    context "when provider config_changed? is false" do
+    context 'when provider config_changed? is false' do
       before do
         subject.and_return(false)
       end
       it { expect(ensure_result).to eq(:insync) }
     end
 
-    context "when provider config_changed? is true" do
+    context 'when provider config_changed? is true' do
       before do
         subject.and_return(true)
       end
@@ -65,5 +65,4 @@ describe cl_ports do
       end
     end
   end
-
 end

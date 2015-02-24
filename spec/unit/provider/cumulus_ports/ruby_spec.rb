@@ -12,7 +12,7 @@ describe provider_class do
       name: 'speeds',
       speed_4_by_10g: 'swp1-2',
       speed_40g: ['swp3'],
-      speed_40g_div_4: ['swp4', 'swp6'],
+      speed_40g_div_4: %w(swp4 swp6),
       speed_10g: ['swp10']
     )
     @provider = provider_class.new(@resource)
@@ -27,11 +27,11 @@ describe provider_class do
     subject { @provider.expand_port_range(port_range) }
     context 'when given an interface range' do
       let(:port_range) { 'swp1-3' }
-      it { is_expected.to eq %w{1 2 3} }
+      it { is_expected.to eq %w(1 2 3) }
     end
     context 'when given a single inteface' do
       let(:port_range) { 'swp10' }
-      it { is_expected.to eq %w{10} }
+      it { is_expected.to eq %w(10) }
     end
   end
 
@@ -44,9 +44,9 @@ describe provider_class do
       allow(File).to receive(:readlines).and_return(ports_conf)
     end
     let(:curr_config) { @provider.read_current_config }
-    context "first entry" do
+    context 'first entry' do
       subject { curr_config[0][1] }
-      it { is_expected.to eq "40G" }
+      it { is_expected.to eq '40G' }
     end
     context 'tenth entry' do
       subject { curr_config[10][1] }
@@ -60,18 +60,21 @@ describe provider_class do
 
   context 'desired_config' do
     subject { @provider.desired_config }
-    it { is_expected.to eq([[1, "4x10G"],
-                            [2, "4x10G"],
-                            [3, "40G"],
-                            [4, "40G/4"],
-                            [6, "40G/4"],
-                            [10, "10G"]]) }
+    it do
+      is_expected.to eq([[1, '4x10G'],
+                         [2, '4x10G'],
+                         [3, '40G'],
+                         [4, '40G/4'],
+                         [6, '40G/4'],
+                         [10, '10G']])
+    end
   end
 
   context 'update_config' do
     let(:tmpfile) { '/tmp/ports.conf' }
-    let(:test_file) { File.dirname(__FILE__) +
-                     '/../../../files/ports.conf.generated' }
+    let(:test_file) do
+      File.dirname(__FILE__) + '/../../../files/ports.conf.generated'
+    end
     before do
       allow(@provider).to receive(:make_copy_of_orig).once
       allow(@provider.class).to receive(:file_path).and_return(tmpfile)
@@ -85,7 +88,7 @@ describe provider_class do
   context 'config_changed?' do
     context 'when actual config == desired config' do
       before do
-        first_arr = [[1, "40G"], ["10","4x10G"]]
+        first_arr = [%w(1, '40G')], [%w(10,'4x10G')]
         allow(@provider).to receive(:read_current_config).and_return(first_arr)
         allow(@provider).to receive(:desired_config).and_return(first_arr)
       end
@@ -95,15 +98,13 @@ describe provider_class do
 
     context 'when actual config != desired config' do
       before do
-        first_arr = [[1, "40G"], ["10","4x10G"]]
-        sec_arr = [[2,"40G"]]
+        first_arr = [%w(1 '40G')], [%w(10 '4x10')]
+        sec_arr = [%w(2, '40G')]
         allow(@provider).to receive(:read_current_config).and_return(first_arr)
         allow(@provider).to receive(:desired_config).and_return(sec_arr)
       end
       subject { @provider.config_changed? }
       it { is_expected.to be true }
-
     end
-
   end
 end
