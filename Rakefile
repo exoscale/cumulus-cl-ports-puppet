@@ -1,12 +1,7 @@
+# puppet labs spec helper rake tasks
 require 'puppetlabs_spec_helper/rake_tasks'
 
-#begin
-#  require 'puppet_blacksmith/rake_tasks'
-#rescue LoadError
-#end
+# does linting and checks style. look at .rubocop.yml
+require 'rubocop/rake_task'
 
-#begin
-#  require 'rubocop/rake_task'
-#  RuboCop::RakeTask.new
-#rescue LoadError
-#end
+RuboCop::RakeTask.new

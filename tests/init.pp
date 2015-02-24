@@ -12,5 +12,5 @@
 
 cumulus_ports {'speeds':
   speed_4_by_10g => ['swp1-2', 'swp17-20'],
-  speed_40g => ['swp3-16', 'swp21-32']
+  speed_40g      => ['swp3-16', 'swp21-32']
 }

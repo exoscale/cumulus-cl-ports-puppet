@@ -40,7 +40,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
         current_port_hash[portnum.to_i] = portattr
       end
     end
-    current_port_hash
+    sort_hash(current_port_hash)
   end
 
   def self.portattrs
@@ -55,7 +55,14 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   def desired_config
     desired_port_hash = {}
     self.class.portattrs.each do |portattr, portattr_str|
-      list_of_ports = resource[portattr].to_a
+      portlist = resource[portattr]
+      if portlist.class == String
+        list_of_ports = [portlist]
+      else
+        # do .to_a because variable may be nil which converts
+        # it to a empty list :)
+        list_of_ports = resource[portattr].to_a
+      end
       list_of_ports.each do |entry|
         port_range = expand_port_range(entry)
         port_range.each do |portnum|
@@ -63,7 +70,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
         end
       end
     end
-    desired_port_hash
+    sort_hash(desired_port_hash)
   end
 
   def sort_hash(myhash)
@@ -102,10 +109,11 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
     end
   end
 
-
+  # If current config and desired config don't match then
+  # the config has changed . Func returns true
   def config_changed?
     current_conf = read_current_config()
     desired_conf = desired_config()
-    sort_hash(current_conf) != sort_hash(desired_conf)
+    current_conf != desired_conf
   end
 end
