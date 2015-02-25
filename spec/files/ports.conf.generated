@@ -1,0 +1,8 @@
+#Managed by Puppet
+#Original file can be found at /tmp/ports.conf.orig
+1=4x10G
+2=4x10G
+3=40G
+4=40G/4
+6=40G/4
+10=10G
