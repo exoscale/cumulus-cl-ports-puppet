@@ -62,7 +62,6 @@ GEM
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.7.1)
     slop (3.6.0)
-    syck (1.0.5)
 
 PLATFORMS
   ruby
@@ -74,4 +73,3 @@ DEPENDENCIES
   rake
   rspec (~> 3.2.0)
   rubocop
-  syck
