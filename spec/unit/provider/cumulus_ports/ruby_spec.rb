@@ -18,6 +18,11 @@ describe provider_class do
     @provider = provider_class.new(@resource)
   end
 
+  context 'operating system confine' do
+    subject { provider_class.confine_collection.summary[:variable][:operatingsystem] }
+    it { is_expected.to eq ["cumulus_linux"] }
+  end
+
   context 'ports.conf location' do
     subject { @provider.class.file_path }
     it { is_expected.to eq '/etc/cumulus/ports.conf' }
