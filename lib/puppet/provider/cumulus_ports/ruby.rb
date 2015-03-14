@@ -26,14 +26,18 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   # port => port_attr config as a hash.
   def read_current_config
     current_port_hash = {}
-    File.readlines(self.class.file_path).each do |line|
-      # line starts with "<num>" followed by "="
-      # e.g "10=40G" would match.
-      # but "# 3=40G" would not
-      if line.match('^\d+=')
-        (portnum, portattr) = line.strip.split('=')
-        current_port_hash[portnum.to_i] = portattr
+    begin
+      File.readlines(self.class.file_path).each do |line|
+        # line starts with "<num>" followed by "="
+        # e.g "10=40G" would match.
+        # but "# 3=40G" would not
+        if line.match('^\d+=')
+          (portnum, portattr) = line.strip.split('=')
+          current_port_hash[portnum.to_i] = portattr
+        end
       end
+    rescue
+      Puppet.info('ports.conf is empty. Creating a new file')
     end
     sort_hash(current_port_hash)
   end
@@ -84,7 +88,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
 
   def make_copy_of_orig
     file_path_copy = self.class.file_path + '.orig'
-    return if File.exist(file_path_copy)
+    return if File.exist?(file_path_copy)
     Puppet.debug("make copy of origin #{self.class.file_path}")
     FileUtils.cp(self.class.file_path, file_path_copy)
   end
