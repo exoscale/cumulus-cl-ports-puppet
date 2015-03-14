@@ -1,10 +1,6 @@
 require 'tempfile'
 
 Puppet::Type.type(:cumulus_ports).provide :ruby do
-  # this creates a bunch of getters/settings for properties/
-  # parameters
-  mk_resource_methods
-
   # If operating system is not cumulus
   # Puppet returns error:
   # "Could not find a suitable provider for cumulus_ports"
