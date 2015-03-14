@@ -1,16 +1,12 @@
 require 'tempfile'
 
 Puppet::Type.type(:cumulus_ports).provide :ruby do
-  # this creates a bunch of getters/settings for properties/
-  # parameters
-  mk_resource_methods
-
   # If operating system is not cumulus
   # Puppet returns error:
   # "Could not find a suitable provider for cumulus_ports"
   # someone asked for a way to log why provider is not suitable
   # but unable to find progress on it. http://bit.ly/17Dhny6
-  confine operatingsystem: [:debian, :cumulus_linux]
+  confine operatingsystem: [:cumulus_linux]
 
   def self.file_path
     '/etc/cumulus/ports.conf'
@@ -30,14 +26,18 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   # port => port_attr config as a hash.
   def read_current_config
     current_port_hash = {}
-    File.readlines(self.class.file_path).each do |line|
-      # line starts with "<num>" followed by "="
-      # e.g "10=40G" would match.
-      # but "# 3=40G" would not
-      if line.match('^\d+=')
-        (portnum, portattr) = line.strip.split('=')
-        current_port_hash[portnum.to_i] = portattr
+    begin
+      File.readlines(self.class.file_path).each do |line|
+        # line starts with "<num>" followed by "="
+        # e.g "10=40G" would match.
+        # but "# 3=40G" would not
+        if line.match('^\d+=')
+          (portnum, portattr) = line.strip.split('=')
+          current_port_hash[portnum.to_i] = portattr
+        end
       end
+    rescue
+      Puppet.info('ports.conf is empty. Creating a new file')
     end
     sort_hash(current_port_hash)
   end
@@ -70,7 +70,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
     end
   end
 
-  def desired_config
+  def build_desired_config
     desired_port_hash = {}
     self.class.portattrs.each do |portattr, portattr_str|
       portlist = resource[portattr]
@@ -88,13 +88,13 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
 
   def make_copy_of_orig
     file_path_copy = self.class.file_path + '.orig'
-    return if File.exist(file_path_copy)
+    return if File.exist?(file_path_copy)
     Puppet.debug("make copy of origin #{self.class.file_path}")
     FileUtils.cp(self.class.file_path, file_path_copy)
   end
 
   def write_to_temp_file(temp_file)
-    desired_port_hash = sort_hash(desired_config)
+    desired_port_hash = sort_hash(@desired_config)
     temp_file.puts '#Managed by Puppet'
     temp_file.puts '#Original file can be found at ' \
       "#{self.class.file_path}.orig"
@@ -124,8 +124,8 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   # If current config and desired config don't match then
   # the config has changed . Func returns true
   def config_changed?
-    current_conf = read_current_config
-    desired_conf = desired_config
-    current_conf != desired_conf
+    @current_config = read_current_config
+    @desired_config = build_desired_config
+    @current_config != @desired_config
   end
 end

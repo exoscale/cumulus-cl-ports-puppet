@@ -94,6 +94,8 @@ The module, currently, does not do any error
 checking. Ensure all config is thoroughly tested or the switch can
 behave in unpredictable ways.
 
+`puppet resource cumulus_ports` doesn't work. To be implemented in a later version
+
 ## Development
 
 1. Fork it.
