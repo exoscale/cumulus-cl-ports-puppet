@@ -65,8 +65,8 @@ describe provider_class do
     end
   end
 
-  context 'desired_config' do
-    subject { @provider.desired_config }
+  context 'build_desired_config' do
+    subject { @provider.build_desired_config }
     it do
       is_expected.to eq([[1, '4x10G'],
                          [2, '4x10G'],
@@ -85,6 +85,7 @@ describe provider_class do
     before do
       allow(@provider).to receive(:make_copy_of_orig).once
       allow(@provider.class).to receive(:file_path).and_return(tmpfile)
+      @provider.config_changed?
       @provider.update_config
     end
     it 'should create a proper ports.conf' do
@@ -97,7 +98,7 @@ describe provider_class do
       before do
         first_arr = [%w(1, '40G')], [%w(10,'4x10G')]
         allow(@provider).to receive(:read_current_config).and_return(first_arr)
-        allow(@provider).to receive(:desired_config).and_return(first_arr)
+        allow(@provider).to receive(:build_desired_config).and_return(first_arr)
       end
       subject { @provider.config_changed? }
       it { is_expected.to be false }
@@ -108,7 +109,7 @@ describe provider_class do
         first_arr = [%w(1 '40G')], [%w(10 '4x10')]
         sec_arr = [%w(2, '40G')]
         allow(@provider).to receive(:read_current_config).and_return(first_arr)
-        allow(@provider).to receive(:desired_config).and_return(sec_arr)
+        allow(@provider).to receive(:build_desired_config).and_return(sec_arr)
       end
       subject { @provider.config_changed? }
       it { is_expected.to be true }

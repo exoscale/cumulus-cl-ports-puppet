@@ -66,7 +66,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
     end
   end
 
-  def desired_config
+  def build_desired_config
     desired_port_hash = {}
     self.class.portattrs.each do |portattr, portattr_str|
       portlist = resource[portattr]
@@ -90,7 +90,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   end
 
   def write_to_temp_file(temp_file)
-    desired_port_hash = sort_hash(desired_config)
+    desired_port_hash = sort_hash(@desired_config)
     temp_file.puts '#Managed by Puppet'
     temp_file.puts '#Original file can be found at ' \
       "#{self.class.file_path}.orig"
@@ -120,8 +120,8 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   # If current config and desired config don't match then
   # the config has changed . Func returns true
   def config_changed?
-    current_conf = read_current_config
-    desired_conf = desired_config
-    current_conf != desired_conf
+    @current_config = read_current_config
+    @desired_config = build_desired_config
+    @current_config != @desired_config
   end
 end
