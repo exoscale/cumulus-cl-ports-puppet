@@ -6,7 +6,7 @@ Puppet::Type.type(:cumulus_ports).provide :ruby do
   # "Could not find a suitable provider for cumulus_ports"
   # someone asked for a way to log why provider is not suitable
   # but unable to find progress on it. http://bit.ly/17Dhny6
-  confine operatingsystem: [:cumulus_linux]
+  confine operatingsystem: [:cumuluslinux]
 
   def self.file_path
     '/etc/cumulus/ports.conf'
