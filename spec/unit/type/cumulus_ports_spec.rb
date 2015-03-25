@@ -34,7 +34,7 @@ describe cl_ports do
       # call the ruby provider and assign it as the default provider
       # provider must be real. can't fake that.
       @provider = double 'provider'
-      allow(@provider).to receive(:name).and_return(:ruby)
+      allow(@provider).to receive(:name).and_return(:cumulus)
       cl_ports.stubs(:defaultprovider).returns @provider
       @cumulus_ports = cl_ports.new(name: 'speeds')
     end
