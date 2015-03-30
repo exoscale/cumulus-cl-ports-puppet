@@ -1,6 +1,6 @@
 {
   "name": "cumuluslinux-cumulus_ports",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Cumulus Networks",
   "summary": "Module for managing Cumulus Linux ports.conf",
   "license": "GPLv2",
