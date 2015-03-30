@@ -1,5 +1,5 @@
 {
-  "name": "cumulus-cumulus_ports",
+  "name": "cumuluslinux-cumulus_ports",
   "version": "1.0.0",
   "author": "Cumulus Networks",
   "summary": "Module for managing Cumulus Linux ports.conf",
