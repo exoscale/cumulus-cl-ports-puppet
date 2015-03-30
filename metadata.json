@@ -1,14 +1,19 @@
 {
   "name": "cumulus-cumulus_ports",
   "version": "1.0.0",
-  "author": "Stanley Karunditu",
+  "author": "Cumulus Networks",
   "summary": "Module for managing Cumulus Linux ports.conf",
   "license": "GPLv2",
-  "source": "https://github.com/CumulusNetworks/cumulus-cumulus_ports",
-  "project_page": "https://github.com/CumulusNetworks/cumulus-cumulus_ports",
-  "issues_url": "https://github.com/CumulusNetworks/cumulus-cumulus_ports",
-  "description": "Module for managing Cumulus Linux ports.conf",
+  "source": "https://github.com/CumulusNetworks/cumulus-cl-ports-puppet",
+  "project_page": "https://github.com/CumulusNetworks/cumulus-cl-ports-puppet",
+  "issues_url": "https://github.com/CumulusNetworks/cumulus-cl-ports-puppet",
   "dependencies": [
     {"name":"puppetlabs/stdlib","version_requirement":">= 3.2.0 < 5.0.0"}
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CumulusLinux",
+      "operatingsystemrelease": ["2.5.0", "2.5.1"]
+    }
   ]
 }
