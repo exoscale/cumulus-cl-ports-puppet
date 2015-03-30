@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'pry'
 
 provider_resource = Puppet::Type.type(:cumulus_ports)
-provider_class = provider_resource.provider(:ruby)
+provider_class = provider_resource.provider(:cumulus)
 
 describe provider_class do
   before(:all) do

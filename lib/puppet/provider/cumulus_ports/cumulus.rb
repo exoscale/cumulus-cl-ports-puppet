@@ -1,6 +1,6 @@
 require 'tempfile'
 
-Puppet::Type.type(:cumulus_ports).provide :ruby do
+Puppet::Type.type(:cumulus_ports).provide :cumulus do
   # If operating system is not cumulus
   # Puppet returns error:
   # "Could not find a suitable provider for cumulus_ports"
