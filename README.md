@@ -44,10 +44,10 @@ The module currently supports one defined type, `cumulus_ports::speeds`
 ```
 node default {
   cumulus_ports { 'speeds':
-    speed_10g => "swp5-48",
-    speed_40g => ["swp49","swp51-52"],
-    speed_40g_div_4 => "swp1-4",
-    speed_4_by_10g => "swp50",
+    speed_40_div_4 => ["swp1-4"],
+    speed_10g => ["swp5-48"],
+    speed_4_by_10g => ["swp49-50"],
+    speed_40g => ["swp51-52"]
   }
 }
 
