@@ -19,9 +19,9 @@ on Cumulus Linux.
 
 ## Module Description
 
-The cumulus_ports module is responsible for setting the initial speed of a 10G or
+The ``cumulus_ports`` module is responsible for setting the initial speed of a 10G or
 40G port. On some bare metal switches, it is possible to take a 40G port and split it up
-into four 10G ports using a breakout cable. For more details, visit [Cumulus
+into four 10G ports using a breakout cable. For more details, read the [Cumulus
 Linux User Guide](http://docs.cumulusnetworks.com) and search for
 "Switch Port Attributes".
 
@@ -41,7 +41,7 @@ This module does not use any default parameters. Support for default parameters 
 
 ## Usage
 
-The module currently supports one define, `cumulus_ports::speeds`.
+The module currently supports one define, `cumulus_ports::speeds`:
 
 ```
 node default {
@@ -61,30 +61,30 @@ node default {
 
 ####`cumulus_ports`
 
-Generates a custom /etc/cumulus/ports.conf based on the following variables:
+Generates a custom `/etc/cumulus/ports.conf` based on the following variables:
 
-* `speed_10g`: `speed_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+* `speed_10g`: `speed_10g => 'swp1-2'` produces the following text in `/etc/cumulus/ports.conf`:
 
   ```
   swp1=10G
   swp2=10G
   ```
 
-* `speed_40g` : `speed_40g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+* `speed_40g` : `speed_40g => 'swp1-2'` produces the following text in `/etc/cumulus/ports.conf`:
 
   ```
   swp1=40G
   swp2=40G
   ```
 
-* `speed_40g_div_4`: `speed_40g_div_4 => ['swp1', 'swp4']` will produce text  in /etc/cumulus/ports.conf
+* `speed_40g_div_4`: `speed_40g_div_4 => ['swp1', 'swp4']` produces the following text in `/etc/cumulus/ports.conf`:
 
   ```
   swp1=40/4
   swp4=40/4
   ```
 
-* `speed_4_by_10g`: `speed_4_by_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+* `speed_4_by_10g`: `speed_4_by_10g => 'swp1-2'` produces the following text in `/etc/cumulus/ports.conf`:
 
   ```
   swp1=4x10G
@@ -95,8 +95,7 @@ Generates a custom /etc/cumulus/ports.conf based on the following variables:
 
 This module only works on Cumulus Linux.
 
-The module does not currently do any error
-checking. Ensure that all config is thoroughly tested, or the switch can
+The module does not currently do any error checking. Ensure that the whole configuration is thoroughly tested, or the switch can
 behave in unpredictable ways.
 
 `puppet resource cumulus_ports` doesn't currently work. This will be implemented in a later version.
@@ -113,7 +112,7 @@ behave in unpredictable ways.
 
 ![Cumulus icon](http://cumulusnetworks.com/static/cumulus/img/logo_2014.png)
 
-Cumulus Linux is a software distribution that runs on top of industry standard
+Cumulus Linux is a software distribution that runs on top of industry-standard
 networking hardware. It enables the latest Linux applications and automation
 tools on networking gear while delivering new levels of innovation and
 ﬂexibility to the data center.
