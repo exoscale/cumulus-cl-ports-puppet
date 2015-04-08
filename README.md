@@ -95,8 +95,7 @@ Generates a custom `/etc/cumulus/ports.conf` based on the following variables:
 
 This module only works on Cumulus Linux.
 
-The module does not currently do any error checking. Ensure that the whole configuration is thoroughly tested, or the switch can
-behave in unpredictable ways.
+The module does not currently do any error checking. Ensure that the whole configuration is thoroughly tested, or the switch can behave in unpredictable ways.
 
 `puppet resource cumulus_ports` doesn't currently work. This will be implemented in a later version.
 
