@@ -15,23 +15,24 @@
 ## Overview
 
 This Puppet module provides a simple interface for managing initial port configuration
-on Cumulus Linux
+on Cumulus Linux.
 
 ## Module Description
 
-The cumulus_ports module  is responsible for setting the initial speed of 10G or
+The cumulus_ports module is responsible for setting the initial speed of a 10G or
 40G port. On some bare metal switches, it is possible to take a 40G port and split it up
 into four 10G ports using a breakout cable. For more details, visit [Cumulus
 Linux User Guide](http://docs.cumulusnetworks.com) and search for
-"Switch Port Attributes"
+"Switch Port Attributes".
 
 ## Setup
 
 ### What cumulus_ports affects
 
-* This module affects the `/etc/cumulus/ports.conf` file
-* To activate the changes in the file, the `switchd` daemon must be restarted
-> **NOTE**: restarting the `switchd` daemon is disruptive
+* This module affects the `/etc/cumulus/ports.conf` file.
+* To activate the changes in the file, the `switchd` daemon must be restarted.
+
+> **NOTE**: Restarting the `switchd` daemon is disruptive.
 
 
 ### Beginning with cumulus_ports
@@ -40,7 +41,8 @@ This module does not use any default parameters. Support for default parameters 
 
 ## Usage
 
-The module currently supports one defined type, `cumulus_ports::speeds`
+The module currently supports one define, `cumulus_ports::speeds`.
+
 ```
 node default {
   cumulus_ports { 'speeds':
@@ -55,46 +57,49 @@ node default {
 
 ## Reference
 
-### Custom Type
-  * `cumulus_ports`:  generates a custom /etc/cumulus/ports.conf based
-  on the following variables:
-  * `speed_10g`: `speed_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+###Types
 
-    ```
-    swp1=10G
-    swp2=10G
-    ```
+####`cumulus_ports`
 
-  * `speed_40g` : `speed_40g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+Generates a custom /etc/cumulus/ports.conf based on the following variables:
 
-    ```
-    swp1=40G
-    swp2=40G
-    ```
+* `speed_10g`: `speed_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
 
-  * `speed_40g_div_4`: `speed_40g_div_4 => ['swp1', 'swp4']` will produce text  in /etc/cumulus/ports.conf
+  ```
+  swp1=10G
+  swp2=10G
+  ```
 
-    ```
-    swp1=40/4
-    swp4=40/4
-    ```
+* `speed_40g` : `speed_40g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
 
-  * `speed_4_by_10g`: `speed_4_by_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+  ```
+  swp1=40G
+  swp2=40G
+  ```
 
-    ```
-    swp1=4x10G
-    swp2=4x10G
-    ```
+* `speed_40g_div_4`: `speed_40g_div_4 => ['swp1', 'swp4']` will produce text  in /etc/cumulus/ports.conf
+
+  ```
+  swp1=40/4
+  swp4=40/4
+  ```
+
+* `speed_4_by_10g`: `speed_4_by_10g => 'swp1-2'` will produce the following text in /etc/cumulus/ports.conf
+
+  ```
+  swp1=4x10G
+  swp2=4x10G
+  ```
 
 ## Limitations
 
 This module only works on Cumulus Linux.
 
-The module, currently, does not do any error
-checking. Ensure all config is thoroughly tested or the switch can
+The module does not currently do any error
+checking. Ensure that all config is thoroughly tested, or the switch can
 behave in unpredictable ways.
 
-`puppet resource cumulus_ports` doesn't work. To be implemented in a later version
+`puppet resource cumulus_ports` doesn't currently work. This will be implemented in a later version.
 
 ## Development
 
@@ -113,5 +118,4 @@ networking hardware. It enables the latest Linux applications and automation
 tools on networking gear while delivering new levels of innovation and
 ﬂexibility to the data center.
 
-For further details please see:
-[cumulusnetworks.com](http://www.cumulusnetworks.com)
+For further details please see [cumulusnetworks.com](http://www.cumulusnetworks.com).
