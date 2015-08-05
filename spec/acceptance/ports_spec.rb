@@ -11,11 +11,11 @@ describe 'ports' do
           content => "I am empty",
         }
 
-        cumulus_ports { 'test':
-          speed_40g_div_4 => ['swp1-4'],
-          speed_10g => ['swp5-9'],
-          speed_4_by_10g => ['swp10-14'],
-          speed_40g => ['swp15-29'],
+        cumulus_ports { 'speeds':
+          speed_10g => ['swp1'],
+          speed_40g => ['swp3','swp5-10', 'swp12'],
+          speed_40g_div_4 => ['swp15','swp16'],
+          speed_4_by_10g => ['swp20-32'],
           require => File['/etc/cumulus/ports.conf'],
         }
       EOS
@@ -23,8 +23,22 @@ describe 'ports' do
       apply_manifest(pp, :catch_failures => true)
     end
 
+    describe file('/etc/cumulus') do
+      it { should be_directory }
+    end
+
     describe file('/etc/cumulus/ports.conf') do
-      it { should exist }
+      it { should be_file }
+      its(:content) { should match(/#Managed by Puppet/) }
+      its(:content) { should match(/1=10G/) }
+      its(:content) { should match(/3=40G/) }
+      its(:content) { should match(/5=40G/) }
+      its(:content) { should match(/10=40G/) }
+      its(:content) { should match(/12=40G/) }
+      its(:content) { should match(/15=40G\/4/) }
+      its(:content) { should match(/16=40G\/4/) }
+      its(:content) { should match(/20=4x10G/) }
+      its(:content) { should match(/32=4x10G/) }
     end
 
   end
