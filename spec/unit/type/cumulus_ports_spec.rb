@@ -36,7 +36,7 @@ describe cl_ports do
       @provider = double 'provider'
       allow(@provider).to receive(:name).and_return(:cumulus)
       cl_ports.stubs(:defaultprovider).returns @provider
-      @cumulus_ports = cl_ports.new(name: 'speeds')
+      @cumulus_ports = cl_ports.new(:name => 'speeds')
     end
     subject { allow(@cumulus_ports.provider).to receive(:config_changed?) }
     let(:ensure_result) { @cumulus_ports.property(:ensure).retrieve }

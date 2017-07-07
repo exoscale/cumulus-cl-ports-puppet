@@ -6,7 +6,7 @@ Puppet::Type.type(:cumulus_ports).provide :cumulus do
   # "Could not find a suitable provider for cumulus_ports"
   # someone asked for a way to log why provider is not suitable
   # but unable to find progress on it. http://bit.ly/17Dhny6
-  confine operatingsystem: [:cumuluslinux]
+  confine :operatingsystem => [:cumuluslinux]
 
   def self.file_path
     '/etc/cumulus/ports.conf'
@@ -44,10 +44,10 @@ Puppet::Type.type(:cumulus_ports).provide :cumulus do
 
   def self.portattrs
     {
-      speed_10g: '10G',
-      speed_40g: '40G',
-      speed_4_by_10g: '4x10G',
-      speed_40g_div_4: '40G/4'
+      :speed_10g => '10G',
+      :speed_40g => '40G',
+      :speed_4_by_10g => '4x10G',
+      :speed_40g_div_4 => '40G/4'
     }
   end
 

@@ -18,7 +18,7 @@ describe 'ports' do
         }
       EOS
 
-      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, :catch_failures => true)
     end
 
     describe file('/etc/cumulus') do
