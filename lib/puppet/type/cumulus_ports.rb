@@ -62,11 +62,27 @@ Puppet::Type.newtype(:cumulus_ports) do
     desc 'sets the port to a 4x10G configuration'
   end
 
+  newparam(:speed_4_by_25g) do
+    desc 'sets the port to a 4x25G configuration'
+  end
+
+  newparam(:speed_2_by_50g) do
+    desc 'sets the port to a 2x50G configuration'
+  end
+
   newparam(:speed_10g) do
     desc 'sets the port to a 10G configuration'
   end
 
   newparam(:speed_40g) do
     desc 'sets the port to a 40G configuration'
+  end
+
+  newparam(:speed_50g) do
+    desc 'sets the port to a 50G configuration'
+  end
+
+  newparam(:speed_100g) do
+    desc 'sets the port to a 100G configuration'
   end
 end
