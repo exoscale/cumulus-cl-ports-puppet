@@ -9,11 +9,11 @@ describe provider_class do
     # resource parameters require to be in arrays!!
     # wonder if I can get away from this requirement
     @resource = provider_resource.new(
-      name: 'speeds',
-      speed_4_by_10g: 'swp1-2',
-      speed_40g: ['swp3'],
-      speed_40g_div_4: %w(swp4 swp6),
-      speed_10g: ['swp10']
+      :name => 'speeds',
+      :speed_4_by_10g => 'swp1-2',
+      :speed_40g => ['swp3'],
+      :speed_40g_div_4 => %w(swp4 swp6),
+      :speed_10g => ['swp10']
     )
     @provider = provider_class.new(@resource)
   end
