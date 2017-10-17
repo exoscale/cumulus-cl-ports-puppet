@@ -6,10 +6,14 @@ describe cl_ports do
   let :params do
     [
       :name,
+      :speed_100g,
+      :speed_50g,
       :speed_40g,
       :speed_10g,
       :speed_40g_div_4,
       :speed_4_by_10g
+      :speed_4_by_25g
+      :speed_2_by_50g
     ]
   end
 
